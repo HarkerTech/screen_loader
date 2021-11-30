@@ -10,6 +10,7 @@ mixin ScreenLoader<T extends StatefulWidget> on State<T> {
 
   /// starts the [loader]
   startLoading() {
+    if (!mounted) return;
     setState(() {
       isLoading = true;
     });
@@ -17,6 +18,7 @@ mixin ScreenLoader<T extends StatefulWidget> on State<T> {
 
   /// stops the [loader]
   stopLoading() {
+    if (!mounted) return;
     setState(() {
       isLoading = false;
     });
