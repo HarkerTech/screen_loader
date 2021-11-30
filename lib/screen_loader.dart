@@ -71,13 +71,16 @@ mixin ScreenLoader<T extends StatefulWidget> on State<T> {
       children: <Widget>[
         screen(context),
         if (isLoading)
-          BackdropFilter(
-            child: _buildLoader(),
-            filter: ImageFilter.blur(
-              sigmaX: _loadingBgBlur(),
-              sigmaY: _loadingBgBlur(),
-            ),
-          ),
+          // Remove backdrop filter if blur value set to zero
+          _loadingBgBlur() == 0
+              ? _buildLoader()
+              : BackdropFilter(
+                  child: _buildLoader(),
+                  filter: ImageFilter.blur(
+                    sigmaX: _loadingBgBlur(),
+                    sigmaY: _loadingBgBlur(),
+                  ),
+                ),
       ],
     );
   }
